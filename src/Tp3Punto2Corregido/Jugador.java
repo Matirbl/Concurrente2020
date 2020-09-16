@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tp3.Punto2Corregido;
-
-import Tp3.Punto2.*;
+package Tp3Punto2Corregido;
 
 /**
  *
