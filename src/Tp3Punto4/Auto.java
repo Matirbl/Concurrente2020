@@ -33,7 +33,7 @@ public class Auto implements Runnable {
         while (kmActual <= 20) {
             try {
                 kmActual += 2;
-                System.out.println("El auto con patente: " + patente + " está andando");
+                System.out.println("El auto con patente: " + patente + " está avanzando");
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Auto.class.getName()).log(Level.SEVERE, null, ex);
