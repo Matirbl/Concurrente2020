@@ -26,29 +26,45 @@ public class Empleado implements Runnable {
     }
 
     public void run() {
+        boolean entre = false;
         try {
-            switch (utiles.Aleatorio.intAleatorio(1, 4)) {
-                case 1:
-                    System.out.println(nombre + " Intenta pedir bebida");
-                    confiteria.sentarse(nombre);
-                    confiteria.solicitarBebida(nombre);
-                    confiteria.irse(nombre);
-                    break;
-                case 2:
-                     System.out.println(nombre + " Intenta pedir comida");
-                    confiteria.sentarse(nombre);
-                    confiteria.solicitarComida(nombre);
-                    confiteria.comer();
-                    confiteria.irse(nombre);
-                    break;
-                case 3:
-                     System.out.println(nombre + " Intenta pedir bebida y comida");
-                    confiteria.sentarse(nombre);
-                    confiteria.solicitarBebida(nombre);
-                    confiteria.solicitarComida(nombre);
-                    confiteria.comer();
-                    confiteria.irse(nombre);
-                    break;
+            while (!entre) {
+
+                switch (utiles.Aleatorio.intAleatorio(1, 4)) {
+                    case 1:
+                        System.out.println(nombre + " Intenta pedir bebida");
+                        entre = confiteria.sentarse(nombre);
+                        if (entre) {
+                            confiteria.solicitarBebida(nombre);
+                            confiteria.irse(nombre);
+                        } else {
+                            Thread.sleep(3000);
+                        }
+                        break;
+                    case 2:
+                        System.out.println(nombre + " Intenta pedir comida");
+                        entre = confiteria.sentarse(nombre);
+                        if (entre) {
+                            confiteria.solicitarComida(nombre);
+                            confiteria.comer();
+                            confiteria.irse(nombre);
+                        }
+                         {
+                            Thread.sleep(3000);
+                        }
+                        break;
+                    case 3:
+                        System.out.println(nombre + " Intenta pedir bebida y comida");
+                        entre = confiteria.sentarse(nombre);
+                        if (entre) {
+                            confiteria.solicitarBebida(nombre);
+                            confiteria.solicitarComida(nombre);
+                            confiteria.comer();
+                            confiteria.irse(nombre);
+                        }
+                        Thread.sleep(3000);
+                        break;
+                }
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);

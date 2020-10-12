@@ -15,23 +15,36 @@ import java.util.concurrent.Semaphore;
 public class Confiteria {
 
     private Semaphore semMesa;
+    private Semaphore semMesa2;
     private Semaphore SemMozo;
     private Semaphore SemCocinero;
     private Semaphore SemComida;
     private Semaphore BebidaEntregada;
+    private Semaphore mutex;
+    private int sillas;
 
     public Confiteria() {
-        semMesa = new Semaphore(2);
+        //   semMesa = new Semaphore(1);
         SemMozo = new Semaphore(0);
         SemCocinero = new Semaphore(0);
         SemComida = new Semaphore(0);
         BebidaEntregada = new Semaphore(0);
+        mutex = new Semaphore(1);
+        sillas = 2;
 
     }
 
-    public void sentarse(String nom) throws InterruptedException {
-        semMesa.acquire();
-        System.out.println("\u001B[32m El empleado:" + nom + " Se sienta el mesa");
+    public synchronized boolean sentarse(String nom) throws InterruptedException {
+        boolean entre = false;
+        if (sillas > 0 && sillas < 3) {
+            System.out.println("\u001B[32m El empleado:" + nom + " Se sienta el mesa ");
+            entre = true;
+            sillas--;
+            //       semMesa.acquire();
+        } else {
+            System.out.println("\u001B[36m El empleado:" + nom + " No se pudo sentar, vuelve mas tarde ");
+        }
+        return entre;
     }
 
     public void solicitarBebida(String nom) throws InterruptedException {
@@ -41,8 +54,8 @@ public class Confiteria {
     }
 
     public void solicitarComida(String nom) {
-        SemCocinero.release();
         System.out.println(nom + " : Solicita comida");
+        SemCocinero.release();
     }
 
     public void comer() throws InterruptedException {
@@ -52,9 +65,10 @@ public class Confiteria {
 
     }
 
-    public void irse(String nom) {
-        System.out.println("\u001B[32m" + nom + ": Terminé de comer, me voy ");
-        semMesa.release();
+    public synchronized void irse(String nom) {
+        sillas++;
+        System.out.println("\u001B[32m" + nom + ": Terminé, me voy ");
+        //semMesa.release();
     }
 
     public void atender(String nom) throws InterruptedException {
