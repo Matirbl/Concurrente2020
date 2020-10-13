@@ -47,7 +47,7 @@ public class Confiteria {
         return entre;
     }
 
-    public void solicitarBebida(String nom) throws InterruptedException {
+    public synchronized void solicitarBebida(String nom) throws InterruptedException {
         SemMozo.release();
         System.out.println(nom + " : Solicita bebida");
         BebidaEntregada.acquire();
@@ -78,7 +78,6 @@ public class Confiteria {
         Thread.sleep(3000);
         BebidaEntregada.release();
         System.out.println("Bebida entregada");
-
     }
 
     public void cocinar(String nom) throws InterruptedException {
