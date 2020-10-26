@@ -42,7 +42,7 @@ public class Confiteria {
 
     public void irse(String nom) {
         System.out.println("\u001B[32m" + nom + ": Terminé de comer, me voy ");
-        SemEmpleado.release();
+        SemEmpleado.release(2);
     }
 
     public void atender(String nom) throws InterruptedException {
