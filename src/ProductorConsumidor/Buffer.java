@@ -6,7 +6,7 @@
 package ProductorConsumidor;
 
 import java.util.concurrent.Semaphore;
-import Lineales.Dinamicas.Cola;
+import Lineales.Dinamicas.Lista;
 import utiles.Aleatorio;
 
 /**
@@ -15,31 +15,38 @@ import utiles.Aleatorio;
  */
 public class Buffer {
 
-    private Semaphore buffer;
-    private Semaphore productor;
+    private Semaphore mutex;
+    private Lista buffer;
+    // private Semaphore productor;
     private Semaphore consumidor;
 
     public Buffer() {
-        buffer = new Semaphore(1);
-        productor = new Semaphore(10);
+        buffer = new Lista();
+        mutex = new Semaphore(1);
+        // productor = new Semaphore(1);
         consumidor = new Semaphore(0);
 
     }
 
     public void consumir() throws InterruptedException {
         consumidor.acquire();
-        buffer.acquire();
-        System.out.println("Quedan " + consumidor.availablePermits() + " productos");
-        buffer.release();
-        productor.release();
+        mutex.acquire();
+        buffer.eliminar(1);
+        System.out.println("Quedan " + buffer.longitud() + " productos");
+        mutex.release();
+        // productor.release();
+
     }
 
-    public void producir() throws InterruptedException {
-        productor.acquire();
-        buffer.acquire();
-        System.out.println("Hay " + consumidor.availablePermits() + " productos");
-        buffer.release();
+    public void producir(int elemento) throws InterruptedException {
+        // productor.acquire();
+        mutex.acquire();
+        buffer.insertar(elemento, 1);
+        System.out.println("Hay " + buffer.longitud() + " productos");
+        mutex.release();
         consumidor.release();
+        // productor.release();
+
     }
 
 }

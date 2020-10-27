@@ -12,7 +12,7 @@ public class Cola {
 
     private Nodo frente;
     private Nodo fin;
-
+  
     public Cola() {
         this.fin = null;
         this.frente = null;

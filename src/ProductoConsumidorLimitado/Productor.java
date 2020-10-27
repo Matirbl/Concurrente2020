@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ProductorConsumidor;
+package ProductoConsumidorLimitado;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utiles.Aleatorio;
 
 /**
  *
@@ -28,8 +27,8 @@ public class Productor implements Runnable {
         while (true) {
 
             try {
-                recurso.producir(Aleatorio.intAleatorio(0, 1000));
-                System.out.println("\u001B[33m " + nombre + " está produciendo un producto");
+                recurso.producir();
+                System.out.println("\u001B[31m " + nombre + " está produciendo un producto");
                 Thread.sleep(2000);
 
             } catch (InterruptedException ex) {
