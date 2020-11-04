@@ -10,7 +10,6 @@ package BarberoDormilon;
  * @author Chino
  */
 public class Barberia {
-//hola, esta es una prueba
     int sillasDisponibles;
 
     int sillonOcupado;
