@@ -22,11 +22,9 @@ public class Cliente implements Runnable {
     public void run() {
         try {
 
-            while (true) {
-                miBarberia.entrar(id);
-                miBarberia.SentarseEnSillon(id);
-                Thread.sleep(2000);
-            }
+            miBarberia.entrar(id);
+            miBarberia.SentarseEnSillon(id);
+            Thread.sleep(2000);
 
         } catch (InterruptedException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
