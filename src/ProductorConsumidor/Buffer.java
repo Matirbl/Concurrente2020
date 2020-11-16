@@ -41,7 +41,7 @@ public class Buffer {
     public void producir(int elemento) throws InterruptedException {
         // productor.acquire();
         mutex.acquire();
-        buffer.insertar(elemento, 1);
+        buffer.insertar(elemento, buffer.longitud() + 1);
         System.out.println("Hay " + buffer.longitud() + " productos");
         mutex.release();
         consumidor.release();

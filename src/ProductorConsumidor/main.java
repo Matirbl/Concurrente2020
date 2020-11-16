@@ -17,16 +17,10 @@ public class main {
 
         Buffer recurso = new Buffer();
 
-        Thread[] consumidores = new Thread[2];
-        Thread[] productores = new Thread[10];
+        Thread[] consumidores = new Thread[10];
+        Thread[] productores = new Thread[2];
 
-        Lista prueba = new Lista();
-        for (int i = 0; i < 10; i++) {
-            prueba.insertar(i, i);
-
-        }
-
-        System.out.println(prueba.toString() + "long: " + prueba.longitud());
+     
 
         for (int i = 0; i < consumidores.length; i++) {
             consumidores[i] = new Thread(new Consumidor("Consumidor " + i, recurso));

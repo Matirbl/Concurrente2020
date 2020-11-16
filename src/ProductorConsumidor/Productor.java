@@ -28,8 +28,9 @@ public class Productor implements Runnable {
         while (true) {
 
             try {
+                System.out.println("\u001B[33m " + nombre + " voy a agregar un producto");
                 recurso.producir(Aleatorio.intAleatorio(0, 1000));
-                System.out.println("\u001B[33m " + nombre + " está produciendo un producto");
+                System.out.println("\u001B[33m " + nombre + " agregué un producto");
                 Thread.sleep(2000);
 
             } catch (InterruptedException ex) {
