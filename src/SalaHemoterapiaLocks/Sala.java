@@ -33,7 +33,7 @@ public class Sala {
     public void entrarSala(String paciente) throws InterruptedException {
         entrada.lock();
         if (camillas > 0) {
-            System.out.println("El paciente: " + paciente + " ocupo una camilla");
+            System.out.println("\u001B[32m" + "El paciente: " + paciente + " ocupo una camilla");
             camillas--;
             entrada.unlock();
         } else {
@@ -86,13 +86,13 @@ public class Sala {
     }
 
     public void donar(String paciente) throws InterruptedException {
-        System.out.println("El paciente: " + paciente + " está donando sangre");
+        System.out.println("\u001B[33m" +"El paciente: " + paciente + " está donando sangre");
         Thread.sleep(4000);
     }
 
     public void salirSala(String paciente) {
         entrada.lock();
-        System.out.println("El paciente: " + paciente + " se va");
+        System.out.println("\u001B[31m" + "El paciente: " + paciente + " se va");
         esperaCamilla.signal();
         camillas++;
         entrada.unlock();
